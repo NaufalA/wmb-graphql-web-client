@@ -4,6 +4,7 @@ import { User } from '../../api/dto/user.dto';
 export interface LoginState {
 status: boolean;
 user?: User;
+loading: boolean;
 }
 
 export interface AuthContextData {

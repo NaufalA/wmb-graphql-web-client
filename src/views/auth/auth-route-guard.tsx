@@ -17,19 +17,20 @@ export function AuthRouteGuard({
 }: AuthRouteGuardProps) {
   const authContext = React.useContext(AuthContext);
 
-  if (authContext?.loginState.status) {
-    if (shouldNotLogin) {
-      return <Navigate to="/" replace />
-    }
-    console.log(authContext.loginState.user?.role, roles);
-    
-    if (roles && !roles.includes((authContext.loginState.user?.role || ''))) {
-      return <Navigate to="/forbidden" replace />
-    }
-  }
+  if (!authContext?.loginState.loading) {
+    if (authContext?.loginState.status) {
+      if (shouldNotLogin) {
+        return <Navigate to="/" replace />
+      }
 
-  if (!authContext?.loginState.status && shouldLogin) {
-    return <Navigate to="/auth/login" replace />
+      if (roles && !roles.includes((authContext.loginState.user?.role || ''))) {
+        return <Navigate to="/forbidden" replace />
+      }
+    }
+
+    if (!authContext?.loginState.status && shouldLogin) {
+      return <Navigate to="/auth/login" replace />
+    }
   }
 
   if (children) {
