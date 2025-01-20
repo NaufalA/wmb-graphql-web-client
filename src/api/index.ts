@@ -20,12 +20,12 @@ class APIContainer {
   }
 }
 
-const httpClient = axios.create({
+export const httpClient = axios.create({
   baseURL: '/api',
 });
 
 httpClient.interceptors.request.use((value) => {
-  value.headers.set("Authorization", localStorage.getItem(LS_TOKEN));
+  value.headers.set("Authorization", `Bearer ${localStorage.getItem(LS_TOKEN)}`);
 
   return value;
 });

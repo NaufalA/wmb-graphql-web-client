@@ -1,11 +1,15 @@
 import { defineConfig, loadEnv, UserConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import relay from "vite-plugin-relay";
 
 // https://vite.dev/config/
 export default ({ mode }: UserConfig) => {
   process.env = { ...process.env, ...loadEnv(mode || 'development', process.cwd()) };
   return defineConfig({
-    plugins: [react()],
+    plugins: [
+      react(),
+      relay,
+    ],
     optimizeDeps: {
       exclude: ['bootstrap'],
     },

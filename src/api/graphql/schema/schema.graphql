@@ -1,0 +1,120 @@
+# pageInfo.graphqls
+type PageInfo {
+  hasPreviousPage: Boolean!
+  hasNextPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+#   user.graphqls
+type User {
+  id: ID!
+  email: String
+  fullName: String
+  role: String
+  createTime: String
+  updateTime: String
+}
+
+input UserConnectionArgs {
+  # pagination
+  first: Int
+  last: Int
+  before: String
+  after: String
+  # filters
+  email: String
+  fullName: String
+  role: String
+}
+
+type UserEdge {
+  cursor: ID!
+  node: User
+}
+
+type UserConnection {
+  edges: [UserEdge]!
+  pageInfo: PageInfo!
+}
+
+input CreateUserInput {
+  email: String!
+  fullName: String!
+  password: String!
+}
+
+input UpdateUserInput {
+  id: ID!
+  email: String
+  fullName: String
+  role: String
+}
+
+# product.graphqls
+type Product {
+  id: ID!
+  productName: String
+  price: Float
+  stock: Float
+  stockUnit: String
+  createTime: String
+  updateTime: String
+}
+
+input ProductConnectionArgs {
+  # pagination
+  first: Int
+  last: Int
+  before: String
+  after: String
+  # filters
+  email: String
+  fullName: String
+  role: String
+}
+
+type ProductEdge {
+  cursor: ID!
+  node: Product
+}
+
+type ProductConnection {
+  edges: [ProductEdge]!
+  pageInfo: PageInfo!
+}
+
+input CreateProductInput {
+  productName: String!
+  price: Float!
+  stock: Float!
+  stockUnit: String!
+}
+
+input UpdateProductInput {
+  id: ID!
+  productName: String
+  price: Float
+  stock: Float
+  stockUnit: String
+}
+
+type Query {
+  # user
+  getUser(id: ID!): User
+  listUsers(input: UserConnectionArgs!): UserConnection!
+  # product
+  getProduct(id: ID!): Product
+  listProducts(first: Int, after: String): ProductConnection!
+}
+
+type Mutation {
+  # user
+  createUser(input: CreateUserInput!): User
+  updateUser(input: UpdateUserInput!): User
+  deleteUser(id: ID!): ID
+  # product
+  createProduct(input: CreateProductInput!): Product
+  updateProduct(input: UpdateProductInput!): Product
+  deleteProduct(id: ID!): ID
+}
