@@ -1,4 +1,4 @@
-import React, { useTransition } from 'react';
+import React from 'react';
 import {
   PreloadedQuery,
   usePaginationFragment,
@@ -14,6 +14,7 @@ import { productListQuery as productListQueryOperation } from '../api/graphql/__
 import { productPaginationFragment$key } from '../api/graphql/__generated__/productPaginationFragment.graphql';
 import { productPaginationQuery } from '../api/graphql/__generated__/productPaginationQuery.graphql';
 import { ProductItem } from './product/list/product-item';
+import { InputGroup, Button, Form } from 'react-bootstrap';
 
 type ProductListProps = {
   queryRef: PreloadedQuery<productListQueryOperation>;
@@ -27,7 +28,7 @@ export function ProductList({
     productListQuery,
     queryRef
   );
-  const [isPending, startTransition] = useTransition();
+  const [isPending, startTransition] = React.useTransition();
   const { data, loadNext } = usePaginationFragment<
     productPaginationQuery,
     productPaginationFragment$key
@@ -78,12 +79,14 @@ export function HomePage(): React.ReactNode {
   const [queryRef, loadQuery] =
     useQueryLoader<productListQueryOperation>(productListQuery);
 
-  const [isPending, startTransition] = useTransition();
+  const [isPending, startTransition] = React.useTransition();
   React.useEffect(() => {
     startTransition(() => {
       loadQuery({}, { fetchPolicy: 'store-or-network' });
     });
   }, [loadQuery]);
+
+  const [search, setSearch] = React.useState('');
 
   return (
     <div className="d-flex flex-column gap-4">
@@ -99,6 +102,25 @@ export function HomePage(): React.ReactNode {
         >
           Refresh
         </button>
+        <InputGroup>
+          <Form.Control
+            placeholder="Search Text"
+            aria-label="Search"
+            aria-describedby="basic-addon2"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <Button
+            variant="outline-primary"
+            onClick={() => {
+              startTransition(() => {
+                loadQuery({ search }, { fetchPolicy: 'store-or-network' });
+              });
+            }}
+          >
+            Search
+          </Button>
+        </InputGroup>
       </div>
       <div className="d-flex flex-column gap-4 mb-4">
         {queryRef && !isPending ? (

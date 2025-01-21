@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<cd9db4ac96b38ee5a8a3853cddc8a212>>
+ * @generated SignedSource<<a8806ff5d87328097d589fde3d5d865f>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,6 +13,7 @@ import { FragmentRefs } from "relay-runtime";
 export type productPaginationQuery$variables = {
   after?: string | null | undefined;
   first?: number | null | undefined;
+  search?: string | null | undefined;
 };
 export type productPaginationQuery$data = {
   readonly " $fragmentSpreads": FragmentRefs<"productPaginationFragment">;
@@ -33,18 +34,30 @@ var v0 = [
     "defaultValue": 10,
     "kind": "LocalArgument",
     "name": "first"
-  }
-],
-v1 = [
-  {
-    "kind": "Variable",
-    "name": "after",
-    "variableName": "after"
   },
   {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "search"
+  }
+],
+v1 = {
+  "kind": "Variable",
+  "name": "after",
+  "variableName": "after"
+},
+v2 = {
+  "kind": "Variable",
+  "name": "first",
+  "variableName": "first"
+},
+v3 = [
+  (v1/*: any*/),
+  (v2/*: any*/),
+  {
     "kind": "Variable",
-    "name": "first",
-    "variableName": "first"
+    "name": "search",
+    "variableName": "search"
   }
 ];
 return {
@@ -55,7 +68,10 @@ return {
     "name": "productPaginationQuery",
     "selections": [
       {
-        "args": (v1/*: any*/),
+        "args": [
+          (v1/*: any*/),
+          (v2/*: any*/)
+        ],
         "kind": "FragmentSpread",
         "name": "productPaginationFragment"
       }
@@ -71,7 +87,7 @@ return {
     "selections": [
       {
         "alias": null,
-        "args": (v1/*: any*/),
+        "args": (v3/*: any*/),
         "concreteType": "ProductConnection",
         "kind": "LinkedField",
         "name": "listProducts",
@@ -206,8 +222,10 @@ return {
       },
       {
         "alias": null,
-        "args": (v1/*: any*/),
-        "filters": null,
+        "args": (v3/*: any*/),
+        "filters": [
+          "search"
+        ],
         "handle": "connection",
         "key": "ProductConnection_listProducts",
         "kind": "LinkedHandle",
@@ -216,16 +234,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "42b4c8133d009e4f57678d4e7bee84c7",
+    "cacheID": "6704346fbe9821eb1789636c0e551c45",
     "id": null,
     "metadata": {},
     "name": "productPaginationQuery",
     "operationKind": "query",
-    "text": "query productPaginationQuery(\n  $after: String\n  $first: Int = 10\n) {\n  ...productPaginationFragment_2HEEH6\n}\n\nfragment productDetailFragment on Product {\n  id\n  productName\n  price\n  stock\n  stockUnit\n  createTime\n  updateTime\n}\n\nfragment productPaginationFragment_2HEEH6 on Query {\n  listProducts(first: $first, after: $after) {\n    edges {\n      cursor\n      node {\n        ...productDetailFragment\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n"
+    "text": "query productPaginationQuery(\n  $after: String\n  $first: Int = 10\n  $search: String\n) {\n  ...productPaginationFragment_2HEEH6\n}\n\nfragment productDetailFragment on Product {\n  id\n  productName\n  price\n  stock\n  stockUnit\n  createTime\n  updateTime\n}\n\nfragment productPaginationFragment_2HEEH6 on Query {\n  listProducts(first: $first, after: $after, search: $search) {\n    edges {\n      cursor\n      node {\n        ...productDetailFragment\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "e5df0e1ddd6ce5ea2a28a42681c4a00d";
+(node as any).hash = "224bd2039f31b95eef52b1fd98998880";
 
 export default node;

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<c28813f3f6e3c1d8d96de4f338df84dd>>
+ * @generated SignedSource<<3cebd08036cccabe429df96043b5d15a>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,6 +13,7 @@ import { FragmentRefs } from "relay-runtime";
 export type userPaginationQuery$variables = {
   after?: string | null | undefined;
   first?: number | null | undefined;
+  search?: string | null | undefined;
 };
 export type userPaginationQuery$data = {
   readonly " $fragmentSpreads": FragmentRefs<"userPaginationFragment">;
@@ -33,18 +34,30 @@ var v0 = [
     "defaultValue": 10,
     "kind": "LocalArgument",
     "name": "first"
-  }
-],
-v1 = [
-  {
-    "kind": "Variable",
-    "name": "after",
-    "variableName": "after"
   },
   {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "search"
+  }
+],
+v1 = {
+  "kind": "Variable",
+  "name": "after",
+  "variableName": "after"
+},
+v2 = {
+  "kind": "Variable",
+  "name": "first",
+  "variableName": "first"
+},
+v3 = [
+  (v1/*: any*/),
+  (v2/*: any*/),
+  {
     "kind": "Variable",
-    "name": "first",
-    "variableName": "first"
+    "name": "search",
+    "variableName": "search"
   }
 ];
 return {
@@ -55,7 +68,10 @@ return {
     "name": "userPaginationQuery",
     "selections": [
       {
-        "args": (v1/*: any*/),
+        "args": [
+          (v1/*: any*/),
+          (v2/*: any*/)
+        ],
         "kind": "FragmentSpread",
         "name": "userPaginationFragment"
       }
@@ -71,7 +87,7 @@ return {
     "selections": [
       {
         "alias": null,
-        "args": (v1/*: any*/),
+        "args": (v3/*: any*/),
         "concreteType": "UserConnection",
         "kind": "LinkedField",
         "name": "listUsers",
@@ -199,8 +215,10 @@ return {
       },
       {
         "alias": null,
-        "args": (v1/*: any*/),
-        "filters": null,
+        "args": (v3/*: any*/),
+        "filters": [
+          "search"
+        ],
         "handle": "connection",
         "key": "UserConnection_listUsers",
         "kind": "LinkedHandle",
@@ -209,16 +227,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "a226d282fab910a012118537e631e617",
+    "cacheID": "9a530de066a683b35e2145cf8564ac71",
     "id": null,
     "metadata": {},
     "name": "userPaginationQuery",
     "operationKind": "query",
-    "text": "query userPaginationQuery(\n  $after: String\n  $first: Int = 10\n) {\n  ...userPaginationFragment_2HEEH6\n}\n\nfragment userDetailFragment on User {\n  id\n  fullName\n  email\n  role\n  createTime\n  updateTime\n}\n\nfragment userPaginationFragment_2HEEH6 on Query {\n  listUsers(first: $first, after: $after) {\n    edges {\n      cursor\n      node {\n        ...userDetailFragment\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n"
+    "text": "query userPaginationQuery(\n  $after: String\n  $first: Int = 10\n  $search: String\n) {\n  ...userPaginationFragment_2HEEH6\n}\n\nfragment userDetailFragment on User {\n  id\n  fullName\n  email\n  role\n  createTime\n  updateTime\n}\n\nfragment userPaginationFragment_2HEEH6 on Query {\n  listUsers(first: $first, after: $after, search: $search) {\n    edges {\n      cursor\n      node {\n        ...userDetailFragment\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "f8c2177a202d204b3b26c66600ee9d57";
+(node as any).hash = "e77e494e14b3395980fbd1e02b2460e5";
 
 export default node;

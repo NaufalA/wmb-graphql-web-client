@@ -38,7 +38,7 @@ export const userPaginationFragment = graphql`
       after: { type: "String" }
     )
   {
-    listUsers(first: $first, after: $after)
+    listUsers(first: $first, after: $after, search: $search)
     @connection(key: "UserConnection_listUsers") {
       edges {
         cursor,
@@ -56,7 +56,7 @@ export const userPaginationFragment = graphql`
   }`
 
 export const userListQuery = graphql`
-  query userListQuery {
+  query userListQuery($search: String) {
       ...userPaginationFragment
   }`
 

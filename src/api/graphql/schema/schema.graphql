@@ -103,15 +103,21 @@ type Query {
   # user
   getUser(id: ID!): User
   listUsers(
-    first: Int,
-    after: String,
-    last: Int,
-    before: String,
-    search: String,
+    first: Int
+    after: String
+    last: Int
+    before: String
+    search: String
   ): UserConnection!
   # product
   getProduct(id: ID!): Product
-  listProducts(first: Int, after: String): ProductConnection!
+  listProducts(
+    first: Int
+    after: String
+    last: Int
+    before: String
+    search: String
+  ): ProductConnection!
 }
 
 type Mutation {

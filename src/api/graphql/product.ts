@@ -40,7 +40,7 @@ export const productPaginationFragment = graphql`
       after: { type: "String" }
     )
   {
-    listProducts(first: $first, after: $after)
+    listProducts(first: $first, after: $after, search: $search)
     @connection(key: "ProductConnection_listProducts") {
       edges {
         cursor,
@@ -58,7 +58,7 @@ export const productPaginationFragment = graphql`
   }`
 
 export const productListQuery = graphql`
-  query productListQuery {
+  query productListQuery($search: String) {
       ...productPaginationFragment
   }`
 

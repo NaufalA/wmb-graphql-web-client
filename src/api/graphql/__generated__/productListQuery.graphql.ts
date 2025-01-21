@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<bd56908e81f6452f8186bd764f103c63>>
+ * @generated SignedSource<<332def5541a216c63a06b6561e9ae3a3>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,7 +10,9 @@
 
 import { ConcreteRequest } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type productListQuery$variables = Record<PropertyKey, never>;
+export type productListQuery$variables = {
+  search?: string | null | undefined;
+};
 export type productListQuery$data = {
   readonly " $fragmentSpreads": FragmentRefs<"productPaginationFragment">;
 };
@@ -22,14 +24,26 @@ export type productListQuery = {
 const node: ConcreteRequest = (function(){
 var v0 = [
   {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "search"
+  }
+],
+v1 = [
+  {
     "kind": "Literal",
     "name": "first",
     "value": 10
+  },
+  {
+    "kind": "Variable",
+    "name": "search",
+    "variableName": "search"
   }
 ];
 return {
   "fragment": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
     "name": "productListQuery",
@@ -45,13 +59,13 @@ return {
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
     "name": "productListQuery",
     "selections": [
       {
         "alias": null,
-        "args": (v0/*: any*/),
+        "args": (v1/*: any*/),
         "concreteType": "ProductConnection",
         "kind": "LinkedField",
         "name": "listProducts",
@@ -182,12 +196,14 @@ return {
             "storageKey": null
           }
         ],
-        "storageKey": "listProducts(first:10)"
+        "storageKey": null
       },
       {
         "alias": null,
-        "args": (v0/*: any*/),
-        "filters": null,
+        "args": (v1/*: any*/),
+        "filters": [
+          "search"
+        ],
         "handle": "connection",
         "key": "ProductConnection_listProducts",
         "kind": "LinkedHandle",
@@ -196,16 +212,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "5b2beb652217c7b3664045614be53566",
+    "cacheID": "041cc57279ab8bc83111a82d73c6b290",
     "id": null,
     "metadata": {},
     "name": "productListQuery",
     "operationKind": "query",
-    "text": "query productListQuery {\n  ...productPaginationFragment\n}\n\nfragment productDetailFragment on Product {\n  id\n  productName\n  price\n  stock\n  stockUnit\n  createTime\n  updateTime\n}\n\nfragment productPaginationFragment on Query {\n  listProducts(first: 10) {\n    edges {\n      cursor\n      node {\n        ...productDetailFragment\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n"
+    "text": "query productListQuery(\n  $search: String\n) {\n  ...productPaginationFragment\n}\n\nfragment productDetailFragment on Product {\n  id\n  productName\n  price\n  stock\n  stockUnit\n  createTime\n  updateTime\n}\n\nfragment productPaginationFragment on Query {\n  listProducts(first: 10, search: $search) {\n    edges {\n      cursor\n      node {\n        ...productDetailFragment\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "f9dda994d183a7e91bd488a6cd707a05";
+(node as any).hash = "d04a644b10ae47c762f603e1fce03634";
 
 export default node;

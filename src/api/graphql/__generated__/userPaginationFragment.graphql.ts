@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<ec24d52dcdf3a99ef572028924d476b7>>
+ * @generated SignedSource<<212308ec604a08dba470b039151ae54b>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -49,6 +49,10 @@ return {
       "defaultValue": 10,
       "kind": "LocalArgument",
       "name": "first"
+    },
+    {
+      "kind": "RootArgument",
+      "name": "search"
     }
   ],
   "kind": "Fragment",
@@ -78,7 +82,13 @@ return {
   "selections": [
     {
       "alias": "listUsers",
-      "args": null,
+      "args": [
+        {
+          "kind": "Variable",
+          "name": "search",
+          "variableName": "search"
+        }
+      ],
       "concreteType": "UserConnection",
       "kind": "LinkedField",
       "name": "__UserConnection_listUsers_connection",
@@ -173,6 +183,6 @@ return {
 };
 })();
 
-(node as any).hash = "f8c2177a202d204b3b26c66600ee9d57";
+(node as any).hash = "e77e494e14b3395980fbd1e02b2460e5";
 
 export default node;

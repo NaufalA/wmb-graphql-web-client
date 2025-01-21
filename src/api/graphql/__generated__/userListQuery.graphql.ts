@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<277d0793b9a952cca078a4fcc824f999>>
+ * @generated SignedSource<<51ae888bfd1dcd4c1b4fa2ce969c4a54>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,7 +10,9 @@
 
 import { ConcreteRequest } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type userListQuery$variables = Record<PropertyKey, never>;
+export type userListQuery$variables = {
+  search?: string | null | undefined;
+};
 export type userListQuery$data = {
   readonly " $fragmentSpreads": FragmentRefs<"userPaginationFragment">;
 };
@@ -22,14 +24,26 @@ export type userListQuery = {
 const node: ConcreteRequest = (function(){
 var v0 = [
   {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "search"
+  }
+],
+v1 = [
+  {
     "kind": "Literal",
     "name": "first",
     "value": 10
+  },
+  {
+    "kind": "Variable",
+    "name": "search",
+    "variableName": "search"
   }
 ];
 return {
   "fragment": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
     "name": "userListQuery",
@@ -45,13 +59,13 @@ return {
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
     "name": "userListQuery",
     "selections": [
       {
         "alias": null,
-        "args": (v0/*: any*/),
+        "args": (v1/*: any*/),
         "concreteType": "UserConnection",
         "kind": "LinkedField",
         "name": "listUsers",
@@ -175,12 +189,14 @@ return {
             "storageKey": null
           }
         ],
-        "storageKey": "listUsers(first:10)"
+        "storageKey": null
       },
       {
         "alias": null,
-        "args": (v0/*: any*/),
-        "filters": null,
+        "args": (v1/*: any*/),
+        "filters": [
+          "search"
+        ],
         "handle": "connection",
         "key": "UserConnection_listUsers",
         "kind": "LinkedHandle",
@@ -189,16 +205,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "28e51947e5f2a36c87a1ce73676bf654",
+    "cacheID": "abd223cf210613f7d559665a774ccd13",
     "id": null,
     "metadata": {},
     "name": "userListQuery",
     "operationKind": "query",
-    "text": "query userListQuery {\n  ...userPaginationFragment\n}\n\nfragment userDetailFragment on User {\n  id\n  fullName\n  email\n  role\n  createTime\n  updateTime\n}\n\nfragment userPaginationFragment on Query {\n  listUsers(first: 10) {\n    edges {\n      cursor\n      node {\n        ...userDetailFragment\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n"
+    "text": "query userListQuery(\n  $search: String\n) {\n  ...userPaginationFragment\n}\n\nfragment userDetailFragment on User {\n  id\n  fullName\n  email\n  role\n  createTime\n  updateTime\n}\n\nfragment userPaginationFragment on Query {\n  listUsers(first: 10, search: $search) {\n    edges {\n      cursor\n      node {\n        ...userDetailFragment\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      startCursor\n      endCursor\n      hasNextPage\n      hasPreviousPage\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "2c751868c04c058d0d7e6e62ef8796eb";
+(node as any).hash = "2804f7794db6db4b87ac9d64dea0be09";
 
 export default node;

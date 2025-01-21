@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<34bcbcc6638e9d19858bf708f4a4288b>>
+ * @generated SignedSource<<60d6dcf53dc532fe97ffdc415e7214da>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -49,6 +49,10 @@ return {
       "defaultValue": 10,
       "kind": "LocalArgument",
       "name": "first"
+    },
+    {
+      "kind": "RootArgument",
+      "name": "search"
     }
   ],
   "kind": "Fragment",
@@ -78,7 +82,13 @@ return {
   "selections": [
     {
       "alias": "listProducts",
-      "args": null,
+      "args": [
+        {
+          "kind": "Variable",
+          "name": "search",
+          "variableName": "search"
+        }
+      ],
       "concreteType": "ProductConnection",
       "kind": "LinkedField",
       "name": "__ProductConnection_listProducts_connection",
@@ -173,6 +183,6 @@ return {
 };
 })();
 
-(node as any).hash = "e5df0e1ddd6ce5ea2a28a42681c4a00d";
+(node as any).hash = "224bd2039f31b95eef52b1fd98998880";
 
 export default node;
