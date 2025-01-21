@@ -15,6 +15,7 @@ export function Navbar(): React.ReactNode {
     context?.setLoginState({
       status: false,
       user: undefined,
+      loading: false,
     });
     localStorage.removeItem(LS_TOKEN);
     window.alert('logged out!');
@@ -33,7 +34,7 @@ export function Navbar(): React.ReactNode {
             </Link>
           </Nav>
           <Nav className="d-flex gap-2">
-            {context?.loginState.user?.role !== 'Guest' && (
+            {context?.loginState.status && context?.loginState.user?.role !== 'Guest' && (
               <NavDropdown title="Admin" id="basic-nav-dropdown" align="end">
                 <NavDropdown.Item as="div">
                   <Link className="dropdown-item" to="admin/products">

@@ -18,7 +18,7 @@ export function ProductDetailPage({ mode }: ProductDetailPageProps): React.React
   );
 
   React.useEffect(() => {
-    loadQuery({ id: id || '' }, { fetchPolicy: 'network-only' });
+    loadQuery({ id: id || '' }, { fetchPolicy: 'store-or-network' });
   }, [id, loadQuery]);
 
   const navigate = useNavigate();

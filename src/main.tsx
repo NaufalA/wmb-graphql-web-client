@@ -26,7 +26,7 @@ export default function Main(): React.ReactNode {
         <AuthProvider>
           <Routes>
             <Route path="" element={<NavbarWrapper />}>
-              <Route path="" element={<HomePage />} />
+              <Route path="" element={<AuthRouteGuard shouldLogin><HomePage /></AuthRouteGuard>} />
               <Route path="auth" element={<AuthRouteGuard shouldNotLogin />}>
                 <Route path="login" element={<LoginPage />} />
                 <Route

@@ -17,16 +17,7 @@ import { userListQuery as userListQueryOperation } from '../../../api/graphql/__
 import { userPaginationQuery } from '../../../api/graphql/__generated__/userPaginationQuery.graphql';
 import { userPaginationFragment$key } from '../../../api/graphql/__generated__/userPaginationFragment.graphql';
 import { AuthContext } from '../../auth';
-
-function getField<T, K extends keyof T>(
-  obj: T,
-  fieldName: string
-): T[K] | string {
-  if (obj) {
-    return obj[fieldName as K];
-  }
-  return '';
-}
+import { getField } from '../../util';
 
 type UserListProps = {
   queryRef: PreloadedQuery<userListQueryOperation>;

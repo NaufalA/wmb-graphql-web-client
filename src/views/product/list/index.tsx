@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useTransition } from 'react';
 import { useQueryLoader } from 'react-relay';
 import { productListQuery } from '../../../api/graphql/product';
 import { ProductList } from './product-list';
@@ -11,8 +11,11 @@ export function ProductListPage(): React.ReactNode {
     productListQuery,
   );
 
+  const [isPending, startTransition] = useTransition();
   React.useEffect(() => {
-    loadQuery({}, { fetchPolicy: 'network-only' });
+    startTransition(() => {
+      loadQuery({}, { fetchPolicy: 'store-or-network' });
+    });
   }, [loadQuery]);
 
   return (
@@ -23,13 +26,17 @@ export function ProductListPage(): React.ReactNode {
         </Link>
         <button
           type="button"
-          onClick={() => {}}
+          onClick={() => {
+            startTransition(() => {
+              loadQuery({}, { fetchPolicy: 'network-only' });
+            });
+          }}
           className="btn btn-secondary"
         >
           Refresh
         </button>
       </div>
-      {queryRef ? (
+      {queryRef && !isPending ? (
         <ProductList
           batchSize={batchSize}
           queryRef={queryRef}

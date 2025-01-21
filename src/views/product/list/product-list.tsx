@@ -11,19 +11,10 @@ import { Link } from 'react-router';
 import { productListQuery as productListQueryOperation } from '../../../api/graphql/__generated__/productListQuery.graphql';
 import { productPaginationQuery } from '../../../api/graphql/__generated__/productPaginationQuery.graphql';
 import { productPaginationFragment$key } from '../../../api/graphql/__generated__/productPaginationFragment.graphql';
-
-function getField<T, K extends keyof T>(
-  obj: T,
-  fieldName: string
-): T[K] | string {
-  if (obj) {
-    return obj[fieldName as K];
-  }
-  return '';
-}
+import { getField } from '../../util';
 
 type ProductListProps = {
-  queryRef: PreloadedQuery<productListQueryOperation>
+  queryRef: PreloadedQuery<productListQueryOperation>;
   batchSize: number;
 };
 export function ProductList({

@@ -21,7 +21,12 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactNode {
         status: true,
         user: JSON.parse(user),
         loading: false,
-      })
+      });
+    } else {
+      setLogin((prevState) => ({
+        ...prevState,
+        loading: false,
+      }));
     }
   }, []);
 
