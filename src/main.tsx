@@ -26,7 +26,14 @@ export default function Main(): React.ReactNode {
         <AuthProvider>
           <Routes>
             <Route path="" element={<NavbarWrapper />}>
-              <Route path="" element={<AuthRouteGuard shouldLogin><HomePage /></AuthRouteGuard>} />
+              <Route
+                path=""
+                element={
+                  <AuthRouteGuard shouldLogin>
+                    <HomePage />
+                  </AuthRouteGuard>
+                }
+              />
               <Route path="auth" element={<AuthRouteGuard shouldNotLogin />}>
                 <Route path="login" element={<LoginPage />} />
                 <Route
@@ -47,7 +54,10 @@ export default function Main(): React.ReactNode {
                 >
                   <Route path="" element={<ProductListPage />} />
                   <Route path="create" element={<ProductCreatePage />} />
-                  <Route path=":id" element={<ProductDetailPage mode={FormMode.EDIT} />} />
+                  <Route
+                    path=":id"
+                    element={<ProductDetailPage mode={FormMode.EDIT} />}
+                  />
                 </Route>
                 <Route
                   path="users"
@@ -57,8 +67,18 @@ export default function Main(): React.ReactNode {
                 >
                   <Route path="" element={<UserListPage />} />
                   <Route path="create" element={<UserCreatePage />} />
-                  <Route path=":id" element={<UserDetailPage mode={FormMode.EDIT} />} />
+                  <Route
+                    path=":id"
+                    element={<UserDetailPage mode={FormMode.EDIT} />}
+                  />
                 </Route>
+              </Route>
+              <Route path="products">
+                <Route
+                  path=":id"
+                  element={<ProductDetailPage mode={FormMode.VIEW} />}
+                />
+                ,
               </Route>
               {/* error routes */}
               <Route path="forbidden" element={<ForbiddenPage />} />
