@@ -1,5 +1,10 @@
 import React, { useTransition } from 'react';
-import { PreloadedQuery, useMutation, usePaginationFragment, usePreloadedQuery } from 'react-relay';
+import {
+  PreloadedQuery,
+  useMutation,
+  usePaginationFragment,
+  usePreloadedQuery,
+} from 'react-relay';
 import {
   productDeleteMutation,
   productListQuery,
@@ -21,12 +26,15 @@ export function ProductList({
   queryRef,
   batchSize,
 }: ProductListProps): React.ReactNode {
-  const product = usePreloadedQuery<productListQueryOperation>(productListQuery, queryRef);
-  const [isPending, startTransition] = useTransition();
-  const { data, loadNext, refetch } = usePaginationFragment<productPaginationQuery, productPaginationFragment$key>(
-    productPaginationFragment,
-    product,
+  const product = usePreloadedQuery<productListQueryOperation>(
+    productListQuery,
+    queryRef
   );
+  const [isPending, startTransition] = useTransition();
+  const { data, loadNext, refetch } = usePaginationFragment<
+    productPaginationQuery,
+    productPaginationFragment$key
+  >(productPaginationFragment, product);
   const onLoadMore = React.useCallback(
     () =>
       startTransition(() => {
@@ -47,9 +55,12 @@ export function ProductList({
             id: d?.id,
           },
           onCompleted: () => {
-            refetch({}, {
-              fetchPolicy: 'network-only',
-            });
+            refetch(
+              {},
+              {
+                fetchPolicy: 'network-only',
+              }
+            );
           },
           onError(error) {
             window.alert(error);
@@ -84,12 +95,14 @@ export function ProductList({
       {
         id: 'createTime',
         label: 'Created at',
-        render: (d) => d?.createTime ? new Date(d.createTime).toLocaleString() : '',
+        render: (d) =>
+          d?.createTime ? new Date(d.createTime).toLocaleString() : '',
       },
       {
         id: 'updateTime',
         label: 'Last Updated',
-        render: (d) => d?.updateTime ? new Date(d.updateTime).toLocaleString() : '',
+        render: (d) =>
+          d?.updateTime ? new Date(d.updateTime).toLocaleString() : '',
       },
       {
         id: 'action',
@@ -149,7 +162,14 @@ export function ProductList({
             />
           ))}
           {data?.listProducts.pageInfo.hasNextPage && (
-            <button type="button" onClick={onLoadMore} disabled={isPending} />
+            <button
+              type="button"
+              onClick={onLoadMore}
+              disabled={isPending}
+              className="btn text-primary"
+            >
+              Load More
+            </button>
           )}
         </tbody>
       </table>

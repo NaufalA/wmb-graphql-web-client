@@ -60,14 +60,21 @@ export function ProductList({
         />
       ))}
       {data?.listProducts.pageInfo.hasNextPage && (
-        <button type="button" onClick={onLoadMore} disabled={isPending} />
+        <button
+          type="button"
+          onClick={onLoadMore}
+          disabled={isPending}
+          className="btn text-primary"
+        >
+          Load More
+        </button>
       )}
     </>
   );
 }
 
 export function HomePage(): React.ReactNode {
-  const batchSize = 1;
+  const batchSize = 10;
   const [queryRef, loadQuery] =
     useQueryLoader<productListQueryOperation>(productListQuery);
 
@@ -93,7 +100,7 @@ export function HomePage(): React.ReactNode {
           Refresh
         </button>
       </div>
-      <div className="d-flex flex-column gap-4">
+      <div className="d-flex flex-column gap-4 mb-4">
         {queryRef && !isPending ? (
           <ProductList batchSize={batchSize} queryRef={queryRef} />
         ) : (

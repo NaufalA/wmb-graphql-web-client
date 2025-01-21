@@ -118,26 +118,29 @@ export function UserList({
       {
         id: 'action',
         label: 'Action',
-        render: (d) => !isSelf(d) ? (
-          <div className="d-flex gap-2">
-            <button
-              type="button"
-              className="btn btn-primary"
-              disabled={isLoading}
-              onClick={() => navigate(d?.id as string)}
-            >
-              Edit
-            </button>
-            <button
-              type="button"
-              className="btn btn-danger"
-              onClick={() => handleDelete(d)}
-              disabled={isLoading}
-            >
-              Delete
-            </button>
-          </div>
-        ) : '',
+        render: (d) =>
+          !isSelf(d) ? (
+            <div className="d-flex gap-2">
+              <button
+                type="button"
+                className="btn btn-primary"
+                disabled={isLoading}
+                onClick={() => navigate(d?.id as string)}
+              >
+                Edit
+              </button>
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={() => handleDelete(d)}
+                disabled={isLoading}
+              >
+                Delete
+              </button>
+            </div>
+          ) : (
+            ''
+          ),
       },
     ],
     [handleDelete, isLoading, isSelf, navigate]
@@ -174,7 +177,14 @@ export function UserList({
             />
           ))}
           {data?.listUsers.pageInfo.hasNextPage && (
-            <button type="button" onClick={onLoadMore} disabled={isPending} />
+            <button
+              type="button"
+              onClick={onLoadMore}
+              disabled={isPending}
+              className="btn text-primary"
+            >
+              Load More
+            </button>
           )}
         </tbody>
       </table>
