@@ -1,4 +1,10 @@
-# React + TypeScript + Vite
+# WMB GraphQL React Web Client
+
+Simple Product List & User List React Web Client app with GraphQL API integration using Relay.
+
+## How to simply run the development server
+- Update `.env.development` with your configured API URL
+- run `yarn dev`
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
