@@ -17,6 +17,7 @@ import {
 } from './views/product';
 import RelayEnvironment from './views/relay/RelayEnvironment';
 import { FormMode } from './constants';
+import { UserListPage, UserCreatePage, UserDetailPage } from './views/user';
 
 export default function Main(): React.ReactNode {
   return (
@@ -53,7 +54,11 @@ export default function Main(): React.ReactNode {
                   element={
                     <AuthRouteGuard shouldLogin roles={['SuperAdmin']} />
                   }
-                />
+                >
+                  <Route path="" element={<UserListPage />} />
+                  <Route path="create" element={<UserCreatePage />} />
+                  <Route path=":id" element={<UserDetailPage mode={FormMode.EDIT} />} />
+                </Route>
               </Route>
               {/* error routes */}
               <Route path="forbidden" element={<ForbiddenPage />} />
